@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        //   enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         // Load courses into RecyclerView
         refreshCourses()
     }
+
     private fun refreshCourses() {
         val courses = dbHelper.getAllCourses()
         adapter.updateCourses(courses)
@@ -72,7 +73,8 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(this, "Failed to add course", Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Toast.makeText(this, "Name and Duration are required", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Name and Duration are required", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
             .setNegativeButton("Cancel", null)
@@ -87,7 +89,6 @@ class MainActivity : AppCompatActivity() {
             refreshCourses()
         }
     }
-
     private fun editCourse(course: Course) {
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_course, null)
         val etName = dialogView.findViewById<EditText>(R.id.etCourseName)
@@ -125,7 +126,8 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(this, "Failed to update course", Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Toast.makeText(this, "Name and Duration are required", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Name and Duration are required", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
             .setNegativeButton("Cancel", null)

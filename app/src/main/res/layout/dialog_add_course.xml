@@ -9,27 +9,27 @@
         android:id="@+id/etCourseName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Course Name"
+        android:hint="@string/course_name"
         android:inputType="text" />
 
     <EditText
         android:id="@+id/etCourseDuration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Course Duration"
+        android:hint="@string/course_duration"
         android:inputType="text" />
 
     <EditText
         android:id="@+id/etCourseTracks"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Course Tracks"
+        android:hint="@string/course_tracks"
         android:inputType="text" />
 
     <EditText
         android:id="@+id/etCourseDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Course Description"
+        android:hint="@string/course_description"
         android:inputType="text" />
 </LinearLayout>

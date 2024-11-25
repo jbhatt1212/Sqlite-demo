@@ -1,14 +1,16 @@
 package com.example.sqlitedemo
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class CourseAdapter (private val courses: MutableList<Course>,
-private val onDelete: (Int) -> Unit,
-private val onEdit: (Course) -> Unit
+class CourseAdapter(
+    private val courses: MutableList<Course>,
+    private val onDelete: (Int) -> Unit,
+    private val onEdit: (Course) -> Unit
 ) : RecyclerView.Adapter<CourseAdapter.CourseViewHolder>() {
 
     class CourseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -32,13 +34,13 @@ private val onEdit: (Course) -> Unit
         holder.courseDuration.text = course.duration
         holder.courseTracks.text = course.tracks
         holder.courseDescription.text = course.description
-
         holder.btnDelete.setOnClickListener { onDelete(course.id) }
         holder.btnEdit.setOnClickListener { onEdit(course) }
     }
 
     override fun getItemCount(): Int = courses.size
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateCourses(newCourses: List<Course>) {
         courses.clear()
         courses.addAll(newCourses)

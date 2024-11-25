@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">Sqlite demo</string>
     <string name="add_course">Add Course</string>
+    <string name="course_description">Course Description</string>
+    <string name="course_tracks">Course Tracks</string>
+    <string name="course_duration">Course Duration</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="course_name">Course Name</string>
+    <string name="name">name</string>
+    <string name="age">age</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="enter_age">Enter Age</string>
 </resources>

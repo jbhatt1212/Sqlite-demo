@@ -1,6 +1,6 @@
 package com.example.sqlitedemo
 
-data class Course (
+data class Course(
     val id: Int,
     val name: String,
     val duration: String,
