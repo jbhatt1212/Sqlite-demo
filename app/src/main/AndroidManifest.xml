@@ -15,7 +15,7 @@
         android:theme="@style/Theme.SqliteDemo"
         tools:targetApi="31">
         <activity
-            android:name=".db.HomeActivity"
+            android:name=".database.MainActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity2"
@@ -24,7 +24,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".database.MainActivity"
+            android:name=".db.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

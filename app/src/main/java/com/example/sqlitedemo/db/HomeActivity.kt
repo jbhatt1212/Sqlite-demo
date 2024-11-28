@@ -37,9 +37,8 @@ class HomeActivity : AppCompatActivity() {
              withContext(Dispatchers.Main){
                  val  response = data
                  dbHandler.insertCountryData(countriesList)
-                 dbHandler.updateBodyColumnFromApi(countriesList)
-
-
+              //   dbHandler.updateBodyColumnFromApi(countriesList)
+                // dbHandler.renameColumn("body","description")
                  Log.e("success", "response : ${response.posts}")
              }
                 }
