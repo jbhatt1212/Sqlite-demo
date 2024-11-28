@@ -80,7 +80,7 @@ class ItemDbHandler(context: Context) :
                 )
                 db.execSQL("DROP TABLE $TABLE_NAME")
                 db.execSQL("ALTER TABLE data_table_temp RENAME TO $TABLE_NAME")
-                //Log.e("SQLite", "Renamed column $COL_BODY to $COL_DES")
+                Log.e("SQLite", "Renamed column $COL_BODY to $COL_DES")
             } catch (e: SQLException) {
                 Log.e("SQLite", "Error renaming column: ${e.message}")
             }
@@ -103,40 +103,41 @@ class ItemDbHandler(context: Context) :
             writableDb.close()
         }
     }
-//    fun updateBodyColumnFromApi(dataList: List<Post>) {
-//        val writableDb = this.writableDatabase
-//
-//        writableDb.beginTransaction()
-//        try {
-//            for (data in dataList) {
-//                // Update the body column for each row
-//                val values = ContentValues().apply {
-//                    put(COL_BODY, data.body)
-//                }
-//
-//                val rowsUpdated = writableDb.update(
-//                    TABLE_NAME,
-//                    values,
-//                    "$COL_ID = ?",
-//                    arrayOf(data.id.toString())
-//                )
-//
-//                if (rowsUpdated > 0) {
-//                    Log.d("DatabaseUpdate", "Updated body for ID: ${data.id}")
-//                } else {
-//                    Log.d("DatabaseUpdate", "No matching row found for ID: ${data.id}")
-//                }
-//            }
-//            writableDb.setTransactionSuccessful()
-//        } catch (e: SQLException) {
-//            Log.e("DatabaseError", "Error updating data: ${e.message}")
-//        } finally {
-//            writableDb.endTransaction()
-//            writableDb.close()
-//        }
-//    }
 
-    fun insertCountryData(dataList: List<Post>): Int {
+    fun updateBodyColumnFromApi(dataList: List<Post>) {
+        val writableDb = this.writableDatabase
+
+        writableDb.beginTransaction()
+        try {
+            for (data in dataList) {
+                // Update the body column for each row
+                val values = ContentValues().apply {
+                    put(COL_BODY, data.body)
+                }
+
+                val rowsUpdated = writableDb.update(
+                    TABLE_NAME,
+                    values,
+                    "$COL_ID = ?",
+                    arrayOf(data.id.toString())
+                )
+
+                if (rowsUpdated > 0) {
+                    Log.d("DatabaseUpdate", "Updated body for ID: ${data.id}")
+                } else {
+                    Log.d("DatabaseUpdate", "No matching row found for ID: ${data.id}")
+                }
+            }
+            writableDb.setTransactionSuccessful()
+        } catch (e: SQLException) {
+            Log.e("DatabaseError", "Error updating data: ${e.message}")
+        } finally {
+            writableDb.endTransaction()
+            writableDb.close()
+        }
+    }
+
+    fun insertData(dataList: List<Post>): Int {
         val writableDb = this.writableDatabase
         var count = 0
 

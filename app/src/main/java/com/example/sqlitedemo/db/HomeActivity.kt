@@ -1,7 +1,5 @@
 package com.example.sqlitedemo.db
 
-import android.content.Intent
-import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -28,25 +26,25 @@ class HomeActivity : AppCompatActivity() {
         dbHandler = ItemDbHandler(this)
         getCountryList()
     }
-        private fun getCountryList() {
-            CoroutineScope(Dispatchers.IO).launch {
 
-                try {
-                    val data = ApiInstance.getService().getData()
-                    val countriesList: List<Post> = data.posts
-             withContext(Dispatchers.Main){
-                 val  response = data
-                 dbHandler.insertCountryData(countriesList)
-              //   dbHandler.updateBodyColumnFromApi(countriesList)
-                // dbHandler.renameColumn("body","description")
-                 Log.e("success", "response : ${response.posts}")
-             }
-                }
-                catch (e:Exception){
-                    Log.e("error","message : ${e.message}")
-                }
-                }
+    private fun getCountryList() {
+        CoroutineScope(Dispatchers.IO).launch {
 
+            try {
+                val data = ApiInstance.getService().getData()
+                val itemList: List<Post> = data.posts
+                withContext(Dispatchers.Main) {
+                    val response = data
+                    dbHandler.insertData(itemList)
+                    //   dbHandler.updateBodyColumnFromApi(countriesList)
+                    // dbHandler.renameColumn("body","description")
+                    Log.e("success", "response : ${response.posts}")
+                }
+            } catch (e: Exception) {
+                Log.e("error", "message : ${e.message}")
+            }
         }
+
+    }
 
 }

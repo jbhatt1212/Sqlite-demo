@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var dbHandler: DatabaseHelper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-      //  enableEdgeToEdge()
+        //  enableEdgeToEdge()
         setContentView(R.layout.activity_main3)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -25,20 +25,21 @@ class MainActivity : AppCompatActivity() {
         dbHandler = DatabaseHelper.getInstance(this)!!
         getItemList()
     }
+
     private fun getItemList() {
         CoroutineScope(Dispatchers.IO).launch {
 
             try {
                 val data = RetrofitInstance.getService().getItem()
                 val itemList: List<Product> = data.products
-                withContext(Dispatchers.Main){
-                    val  response = data
+                withContext(Dispatchers.Main) {
+                    val response = data
                     dbHandler.insertItem(itemList)
+                     dbHandler.updateBodyColumnFromApi(itemList)
                     Log.e("success", "response : ${response.products}")
                 }
-            }
-            catch (e:Exception){
-                Log.e("error","message : ${e.message}")
+            } catch (e: Exception) {
+                Log.e("error", "message : ${e.message}")
             }
         }
 

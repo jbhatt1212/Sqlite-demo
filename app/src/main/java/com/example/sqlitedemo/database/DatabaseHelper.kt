@@ -66,6 +66,38 @@ class DatabaseHelper private constructor(private val context: Context) :
         }
         return count
     }
+    fun updateBodyColumnFromApi(dataList: List<Product>) {
+        val writableDb = this.writableDatabase
+
+        writableDb.beginTransaction()
+        try {
+            for (data in dataList) {
+                // Update the body column for each row
+                val values = ContentValues().apply {
+                    put(TableEntry.COL_STOKE , data.stock)
+                    put(TableEntry.COL_CATEGORY,data.category)
+                }
+
+                val rowsUpdated = writableDb.update(TableEntry.TABLE_NAME,
+                    values,
+                    "${TableEntry.COL_ID} = ?",
+                    arrayOf(data.id.toString())
+                )
+
+                if (rowsUpdated > 0) {
+                    Log.d("DatabaseUpdate", "Updated body for ID: ${data.id}")
+                } else {
+                    Log.d("DatabaseUpdate", "No matching row found for ID: ${data.id}")
+                }
+            }
+            writableDb.setTransactionSuccessful()
+        } catch (e: SQLException) {
+            Log.e("DatabaseError", "Error updating data: ${e.message}")
+        } finally {
+            writableDb.endTransaction()
+            writableDb.close()
+        }
+    }
 
     @SuppressLint("DefaultLocale")
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -119,20 +151,37 @@ class DatabaseHelper private constructor(private val context: Context) :
 
     @Throws(IOException::class)
     private fun executeSQLScript(db: SQLiteDatabase, reader: BufferedReader) {
-        var line: String
-        var statement = StringBuilder()
-        while ((reader.readLine().also { line = it }) != null) {
-            statement.append(line)
-            statement.append("\n")
-            if (line.endsWith(";")) {
-                db.execSQL(statement.toString())
-                statement = StringBuilder()
+        val cursor = db.rawQuery("PRAGMA table_info(product_table)", null)
+        var columnExists = false
+        cursor.use { // Use the `use` function to ensure the cursor is closed properly
+            while (it.moveToNext()) {
+                val columnName = it.getString(1) // Index 1 gives the column name
+                if (columnName == "stoke") {
+                    columnExists = true
+                    break
+                }
+            }
+        }
+
+        var line: String?
+        val statement = StringBuilder()
+        while (reader.readLine().also { line = it } != null) {
+            statement.append(line).append("\n")
+            try {
+                if (line!!.trim().endsWith(";") && !columnExists) {
+                    Log.d(TAG, "Executing SQL: ${statement.toString()}")
+                    db.execSQL(statement.toString())
+                    Log.d(TAG, "SQL executed successfully.")
+                    statement.clear()
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Error executing SQL: ${statement.toString()}", e)
             }
         }
     }
 
     companion object {
-        const val DATABASE_VERSION: Int = 2
+        const val DATABASE_VERSION: Int = 6
 
         const val DATABASE_NAME: String = "database.db"
         private val TAG: String = DatabaseHelper::class.java.name

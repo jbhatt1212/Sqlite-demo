@@ -1,0 +1,1 @@
+UPDATE product_table SET category

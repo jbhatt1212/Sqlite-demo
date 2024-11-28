@@ -8,6 +8,7 @@ object TableEntry:BaseColumns {
     const val COL_TITLE = "title"
     const val COL_BRAND = "brand"
     const val COL_CATEGORY = "category"
+    const val COL_STOKE = "stoke"
 
     const val SQL_CREATE_ENTRY_TABLE = """
         CREATE TABLE $TABLE_NAME (
@@ -15,7 +16,8 @@ object TableEntry:BaseColumns {
              $COL_ID INTEGER,
              $COL_TITLE TEXT,
              $COL_BRAND TEXT,
-             $COL_CATEGORY TEXT
+             $COL_CATEGORY TEXT,
+             $COL_STOKE INTEGER
         )
     """
 }
