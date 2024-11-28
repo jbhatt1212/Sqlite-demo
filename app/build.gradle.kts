@@ -44,5 +44,13 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
+    implementation(libs.retrofit)
+    implementation(libs.logging.interceptor)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation (libs.kotlinx.coroutines.core)
+    implementation(libs.okhttp)
+
+
+    implementation(libs.converter.gson)
     androidTestImplementation(libs.androidx.espresso.core)
 }

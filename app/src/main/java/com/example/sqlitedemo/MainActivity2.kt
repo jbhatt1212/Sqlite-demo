@@ -60,7 +60,7 @@ class MainActivity2 : AppCompatActivity() {
                     if (id != -1L) {
                         Toast.makeText(this, "Course added", Toast.LENGTH_SHORT).show()
                         refreshCourses()
-                    } else {
+                    } else{
                         Toast.makeText(this, "Failed to add course", Toast.LENGTH_SHORT).show()
                     }
                 } else {
@@ -106,7 +106,7 @@ class MainActivity2 : AppCompatActivity() {
                         Toast.makeText(this, "Course updated", Toast.LENGTH_SHORT).show()
                         refreshCourses()
                     } else {
-                        Toast.makeText(this, "Failed to update course", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     Toast.makeText(this, "Name and Age are required", Toast.LENGTH_SHORT).show()

@@ -21,13 +21,13 @@ class DataAdapter(
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
-        val view= LayoutInflater.from(parent.context).inflate(R.layout.data_items,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.data_items, parent, false)
         return DataViewHolder(view)
     }
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
-       val data = dataItem[position]
+        val data = dataItem[position]
         holder.name.text = data.name
         holder.age.text = data.age
         holder.btnDelete.setOnClickListener { onDelete(data.id) }
@@ -37,8 +37,9 @@ class DataAdapter(
     override fun getItemCount(): Int {
         return dataItem.size
     }
+
     @SuppressLint("NotifyDataSetChanged")
-    fun updateData(newData :List<ModelData>){
+    fun updateData(newData: List<ModelData>) {
         dataItem.clear()
         dataItem.addAll(newData)
         notifyDataSetChanged()
